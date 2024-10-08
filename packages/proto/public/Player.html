@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,8 +19,36 @@
     />
   </head>
   <body>
-    <header><h1>Welcome user</h1></header>
-    <ul>
+    <header>
+      <h1>Steam Games Essentials</h1>
+      <div>
+        <a href="./Game.html"> Games Played </a>
+        <svg class="icon"><use href="./icons/game.svg#icon-play" /></svg>
+      </div>
+      <div>
+        <a href="./Rating.html"> Games Rated </a>
+        <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
+      </div>
+      <div>
+        <a href="./Review.html"> Games you Reviewed </a>
+        <svg class="icon"><use href="./icons/game.svg#icon-review" /></svg>
+      </div>
+      <div>
+        <a href="./Recommendation.html"> Recommendations </a>
+        <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
+      </div>
+      <div>
+        Money spend on games
+        <svg class="icon"><use href="./icons/game.svg#icon-money" /></svg>
+      </div>
+      <h3>
+        <svg class="icon">
+          <use href="./icons/game.svg#icon-user" />
+        </svg>
+        Account
+      </h3>
+    </header>
+    <!-- <ul>
       <li>
         <a href="./Game.html"> Games Played </a>
         <svg class="icon"><use href="./icons/game.svg#icon-play" /></svg>
@@ -40,6 +69,8 @@
         Money spend on games
         <svg class="icon"><use href="./icons/game.svg#icon-money" /></svg>
       </li>
-    </ul>
+    </ul> -->
+    Game Object. There should be multiple of these, in a scroll-down fashion.
+    Game photo should appear, hovering over them will review basic stats.
   </body>
 </html>
