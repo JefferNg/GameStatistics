@@ -1,12 +1,12 @@
 body {
-  background-color: papayawhip;
-  color: #444;
+  background-color: var(--color-background-page);
+  color: var(--color-text);
   font-family: Bitter, Palatino, Georgia, "Times New Roman", serif;
   font-weight: var(--font-weight-normal);
 }
 header {
-  color: whitesmoke;
-  background-color: rgb(81, 39, 131);
+  color: var(--color-header);
+  background-color: var(--color-background-header);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,13 +16,15 @@ header h3,
 header div {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 h1 {
   font-family: Prompt, Verdana, Tahoma, Arial, sans-serif;
   font-weight: var(--font-weight-strong);
+  font-size: x-large;
 }
 a {
-  color: #00aaff;
+  color: var(--color-link);
 }
 .review {
   display: flex;
@@ -46,4 +48,19 @@ svg.icon {
 li {
   display: flex;
   align-items: center;
+}
+dl {
+  display: flex;
+  flex-direction: column;
+}
+dd {
+  padding-left: 2em;
+}
+p {
+  padding: var(--padding-normal);
+}
+#game-layout {
+  display: grid;
+  grid-template-columns: [start] 1fr 1fr 1fr 1fr 1fr 1fr [end];
+  row-gap: 5em;
 }

@@ -3,4 +3,10 @@
   --font-weight-normal: 400;
   --font-weight-strong: 700;
   --padding-normal: 0.5em;
+
+  --color-text: #444;
+  --color-background-page: papayawhip;
+  --color-header: whitesmoke;
+  --color-background-header: rgb(81 39 131);
+  --color-link: #0af;
 }
