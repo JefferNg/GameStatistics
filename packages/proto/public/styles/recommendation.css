@@ -6,3 +6,10 @@ dl {
 dd {
   padding-left: 2em;
 }
+#rec-head {
+  justify-content: flex-start;
+}
+#rec-icon {
+  width: var(--svg-icon-size-med);
+  height: var(--svg-icon-size-med);
+}
