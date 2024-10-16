@@ -2,13 +2,19 @@
 <html>
   <head>
     <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/rating.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
   </head>
   <body>
-    <header><h1>Rating</h1></header>
+    <header id="rate-head">
+      <h1>Rating</h1>
+      <svg class="icon" id="rate-icon">
+        <use href="./icons/game.svg#icon-rate" />
+      </svg>
+    </header>
     <a href="./index.html">Back to Player</a>
-    <div class="rating">
+    <!-- <div class="rating">
       <label>
         <input type="radio" name="recommends" />
         Recommend
@@ -18,6 +24,20 @@
         Not Recommend
       </label>
     </div>
-    <p>Review</p>
+    <p>Review</p> -->
+    <div class="game-layout">
+      <p>
+        This will contain game components that the user has rated. Ideally, this
+        will connect to their Steam account.
+      </p>
+      <p>
+        This will contain game components that the user has rated. Ideally, this
+        will connect to their Steam account.
+      </p>
+      <p>
+        This will contain game components that the user has rated. Ideally, this
+        will connect to their Steam account.
+      </p>
+    </div>
   </body>
 </html>
