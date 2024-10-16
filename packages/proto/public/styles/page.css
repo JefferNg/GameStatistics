@@ -12,12 +12,6 @@ header {
   justify-content: space-between;
   padding: var(--padding-normal);
 }
-header h3,
-header div {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
 h1 {
   font-family: Prompt, Verdana, Tahoma, Arial, sans-serif;
   font-weight: var(--font-weight-strong);
@@ -40,27 +34,17 @@ a {
 }
 svg.icon {
   display: inline;
-  height: 2em;
-  width: 2em;
+  height: var(--svg-icon-size-small);
+  width: var(--svg-icon-size-small);
   vertical-align: top;
   fill: currentColor;
-}
-li {
-  display: flex;
-  align-items: center;
-}
-dl {
-  display: flex;
-  flex-direction: column;
-}
-dd {
-  padding-left: 2em;
 }
 p {
   padding: var(--padding-normal);
 }
-#game-layout {
+.game-layout {
   display: grid;
   grid-template-columns: [start] 1fr 1fr 1fr 1fr 1fr 1fr [end];
   row-gap: 5em;
+  width: 100%;
 }

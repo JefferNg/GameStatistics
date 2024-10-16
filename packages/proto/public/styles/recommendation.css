@@ -1,0 +1,8 @@
+dl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+dd {
+  padding-left: 2em;
+}
