@@ -2,18 +2,38 @@
 <html>
   <head>
     <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/review.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
   </head>
   <body>
-    <header><h1>Game Review</h1></header>
+    <header id="review-head">
+      <h1>Game Review</h1>
+      <svg class="icon" id="review-icon">
+        <use href="./icons/game.svg#icon-review" />
+      </svg>
+    </header>
     <a href="./index.html">Back to Player</a>
-    <div class="review">
+    <!-- <div class="review">
       <textarea
         class="review-text"
         placeholder="Write your review here"
       ></textarea>
     </div>
-    <button>Submit Review</button>
+    <button>Submit Review</button> -->
+    <div class="game-layout">
+      <p>
+        This will contain game components that the user has wrote a review for.
+        Ideally, this will connect to their Steam account.
+      </p>
+      <p>
+        This will contain game components that the user has wrote a review for.
+        Ideally, this will connect to their Steam account.
+      </p>
+      <p>
+        This will contain game components that the user has wrote a review for.
+        Ideally, this will connect to their Steam account.
+      </p>
+    </div>
   </body>
 </html>

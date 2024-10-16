@@ -1,0 +1,7 @@
+#review-head {
+  justify-content: flex-start;
+}
+#review-icon {
+  width: var(--svg-icon-size-med);
+  height: var(--svg-icon-size-med);
+}
