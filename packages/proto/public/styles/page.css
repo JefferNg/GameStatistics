@@ -43,8 +43,36 @@ p {
   padding: var(--padding-normal);
 }
 .game-layout {
+  --page-grids: 6;
   display: grid;
-  grid-template-columns: [start] 1fr 1fr 1fr 1fr 1fr 1fr [end];
+  grid-template-columns: repeat(var(--page-grids), 1fr);
   row-gap: 5em;
   width: 100%;
+}
+@media screen and (max-width: 50rem) {
+  .game-layout {
+    --page-grids: 4;
+    display: grid;
+    grid-template-columns: repeat(var(--page-grids), 1fr);
+    row-gap: 5em;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 30rem) {
+  .game-layout {
+    --page-grids: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--page-grids), 1fr);
+    row-gap: 5em;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 100rem) {
+  .game-layout {
+    --page-grids: 12;
+    display: grid;
+    grid-template-columns: repeat(var(--page-grids), 1fr);
+    row-gap: 5em;
+    width: 100%;
+  }
 }
