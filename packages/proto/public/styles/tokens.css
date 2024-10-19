@@ -8,7 +8,7 @@
   --color-background-page: papayawhip;
   --color-header: whitesmoke;
   --color-background-header: rgb(81 39 131);
-  --color-link: #0af;
+  --color-link: currentColor;
 
   --svg-icon-size-small: 2em;
   --svg-icon-size-med: 4em;
