@@ -35,6 +35,21 @@
         "game-card": GameElement,
       });
     </script>
+    <script>
+      document.body.addEventListener("dark-mode:toggle", (event) => {
+        const page = event.currentTarget;
+        const checked = event.detail.checked;
+        page.classList.toggle("dark-mode", checked);
+      });
+
+      function toggleDarkMode(target, checked) {
+        const customEvent = new CustomEvent("dark-mode:toggle", {
+          bubbles: true,
+          detail: { checked },
+        });
+        target.dispatchEvent(customEvent);
+      }
+    </script>
     <header>
       <h1>Steam Games Essentials</h1>
       <div>
@@ -53,6 +68,13 @@
         Money spend on games
         <svg class="icon"><use href="./icons/game.svg#icon-money" /></svg>
       </div>
+      <label
+        onchange="event.stopPropagation();
+        toggleDarkMode(document.body, event.target.checked)"
+      >
+        <input type="checkbox" />
+        Dark mode
+      </label>
       <h3>
         <svg class="icon">
           <use href="./icons/game.svg#icon-user" />

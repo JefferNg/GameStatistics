@@ -13,3 +13,11 @@
   --svg-icon-size-small: 2em;
   --svg-icon-size-med: 4em;
 }
+
+body.dark-mode {
+  --color-text: whitesmoke;
+  --color-background-page: rgb(30, 0, 32);
+  --color-header: var(--color-background-page);
+  --color-background-header: papayawhip;
+  --color-link: currentColor;
+}
