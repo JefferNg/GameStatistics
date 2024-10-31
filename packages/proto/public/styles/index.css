@@ -8,3 +8,6 @@ li {
   display: flex;
   align-items: center;
 }
+.game-layout a {
+  text-decoration: none;
+}

@@ -18,8 +18,6 @@
       href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <body>
     <script type="importmap">
       {
         "imports": {
@@ -49,7 +47,10 @@
         });
         target.dispatchEvent(customEvent);
       }
+      window.toggleDarkMode = toggleDarkMode;
     </script>
+  </head>
+  <body>
     <header>
       <h1>Steam Games Essentials</h1>
       <div>
@@ -83,62 +84,78 @@
       </h3>
     </header>
     <div class="game-layout">
-      <game-card>
-        <h1 slot="game-name">The Sims 4</h1>
-        <li slot="price">Price: $29.99</li>
-        <li slot="genre">Genre: Life Sim</li>
-        <li slot="rating">Rating: 8.6</li>
-        <li slot="player-count">Current Players: 30,647</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Stardew Valley</h1>
-        <li slot="price">Price: $14.99</li>
-        <li slot="genre">Genre: Farming Sim</li>
-        <li slot="rating">Rating: 9.8</li>
-        <li slot="player-count">Current Players: 77,436</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Team Fortress 2</h1>
-        <li slot="price">Price: Free</li>
-        <li slot="genre">Genre: FPS</li>
-        <li slot="rating">Rating: 8.8</li>
-        <li slot="player-count">Current Players: 37,464</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Grand Theft Auto 5</h1>
-        <li slot="price">Price: $29.99</li>
-        <li slot="genre">Genre: Open World</li>
-        <li slot="rating">Rating: 8.7</li>
-        <li slot="player-count">Current Players: 57,837</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Cats</h1>
-        <li slot="price">Price: Free</li>
-        <li slot="genre">Genre: Clicker</li>
-        <li slot="rating">Rating: 7.4</li>
-        <li slot="player-count">Current Players: 21,841</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Helldivers 2</h1>
-        <li slot="price">Price: $39.99</li>
-        <li slot="genre">Genre: Third-Person Shooter</li>
-        <li slot="rating">Rating: 7.2</li>
-        <li slot="player-count">Current Players: 21,461</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Overwatch 2</h1>
-        <li slot="price">Price: Free</li>
-        <li slot="genre">Genre: Hero Shooter</li>
-        <li slot="rating">Rating: 2.1</li>
-        <li slot="player-count">Current Players: 28,284</li>
-      </game-card>
-      <game-card>
-        <h1 slot="game-name">Slay the Spire</h1>
-        <li slot="price">Price: $24.99</li>
-        <li slot="genre">Genre: Card Game</li>
-        <li slot="rating">Rating: 9.7</li>
-        <li slot="player-count">Current Players: 8,733</li>
-      </game-card>
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">The Sims 4</h1>
+          <li slot="price">Price: $29.99</li>
+          <li slot="genre">Genre: Life Sim</li>
+          <li slot="rating">Rating: 8.6</li>
+          <li slot="player-count">Current Players: 30,647</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Stardew Valley</h1>
+          <li slot="price">Price: $14.99</li>
+          <li slot="genre">Genre: Farming Sim</li>
+          <li slot="rating">Rating: 9.8</li>
+          <li slot="player-count">Current Players: 77,436</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Team Fortress 2</h1>
+          <li slot="price">Price: Free</li>
+          <li slot="genre">Genre: FPS</li>
+          <li slot="rating">Rating: 8.8</li>
+          <li slot="player-count">Current Players: 37,464</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Grand Theft Auto 5</h1>
+          <li slot="price">Price: $29.99</li>
+          <li slot="genre">Genre: Open World</li>
+          <li slot="rating">Rating: 8.7</li>
+          <li slot="player-count">Current Players: 57,837</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Cats</h1>
+          <li slot="price">Price: Free</li>
+          <li slot="genre">Genre: Clicker</li>
+          <li slot="rating">Rating: 7.4</li>
+          <li slot="player-count">Current Players: 21,841</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Helldivers 2</h1>
+          <li slot="price">Price: $39.99</li>
+          <li slot="genre">Genre: Third-Person Shooter</li>
+          <li slot="rating">Rating: 7.2</li>
+          <li slot="player-count">Current Players: 21,461</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Overwatch 2</h1>
+          <li slot="price">Price: Free</li>
+          <li slot="genre">Genre: Hero Shooter</li>
+          <li slot="rating">Rating: 2.1</li>
+          <li slot="player-count">Current Players: 28,284</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Slay the Spire</h1>
+          <li slot="price">Price: $24.99</li>
+          <li slot="genre">Genre: Card Game</li>
+          <li slot="rating">Rating: 9.7</li>
+          <li slot="player-count">Current Players: 8,733</li>
+        </game-card></a
+      >
     </div>
   </body>
 </html>
