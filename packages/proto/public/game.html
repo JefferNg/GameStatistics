@@ -7,9 +7,30 @@
     <link rel="stylesheet" href="styles/tokens.css" />
   </head>
   <body>
-    <header><h1>Game</h1></header>
+    <header>
+      <h1>Game</h1>
+      <div>
+        <a href="./rating.html"> Games Rated </a>
+        <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
+      </div>
+      <div>
+        <a href="./recommendation.html"> Recommended Games </a>
+        <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
+      </div>
+      <h3>
+        <a href="./account.html"
+          ><svg class="icon">
+            <use href="./icons/game.svg#icon-user" />
+          </svg>
+          Account
+        </a>
+      </h3>
+    </header>
     <a href="./index.html">Back to Main</a>
-    <div style="background-image: url('./image/video-game-background.png')">
+    <div
+      id="game-content"
+      style="background-image: url('./image/video-game-background.png')"
+    >
       <ul>
         <li>Price</li>
         <li>Genre</li>

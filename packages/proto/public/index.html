@@ -57,18 +57,18 @@
         <a href="./rating.html"> Games Rated </a>
         <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
       </div>
-      <div>
+      <!-- <div>
         <a href="./review.html"> Games you Reviewed </a>
         <svg class="icon"><use href="./icons/game.svg#icon-review" /></svg>
-      </div>
+      </div> -->
       <div>
         <a href="./recommendation.html"> Recommended Games </a>
         <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
       </div>
-      <div>
+      <!-- <div>
         Money spend on games
         <svg class="icon"><use href="./icons/game.svg#icon-money" /></svg>
-      </div>
+      </div> -->
       <label
         onchange="event.stopPropagation();
         toggleDarkMode(document.body, event.target.checked)"
@@ -77,10 +77,12 @@
         Dark mode
       </label>
       <h3>
-        <svg class="icon">
-          <use href="./icons/game.svg#icon-user" />
-        </svg>
-        Account
+        <a href="./account.html"
+          ><svg class="icon">
+            <use href="./icons/game.svg#icon-user" />
+          </svg>
+          Account
+        </a>
       </h3>
     </header>
     <div class="game-layout">

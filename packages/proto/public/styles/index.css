@@ -4,10 +4,3 @@ header div {
   align-items: center;
   flex-wrap: wrap;
 }
-li {
-  display: flex;
-  align-items: center;
-}
-.game-layout a {
-  text-decoration: none;
-}

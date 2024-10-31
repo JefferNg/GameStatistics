@@ -1,4 +1,10 @@
-div {
+header h3,
+header div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#game-content {
   height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
