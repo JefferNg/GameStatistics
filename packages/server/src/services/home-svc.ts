@@ -32,6 +32,6 @@ const games = {
 ]
 };
 
-export function getGame(_: string) {
+export function getGame() {
     return games;
 }

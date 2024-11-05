@@ -53,7 +53,7 @@ const games = {
     }
   ]
 };
-function getGame(_) {
+function getGame() {
   return games;
 }
 // Annotate the CommonJS export names for ESM import in node:

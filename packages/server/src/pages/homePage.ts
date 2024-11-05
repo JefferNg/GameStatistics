@@ -67,10 +67,12 @@ export class HomePage {
                 Dark mode
             </label>
             <h3>
-                <svg class="icon">
-                <use href="./icons/game.svg#icon-user" />
-                </svg>
-                Account
+                <a href="../account/1">
+                    <svg class="icon">
+                    <use href="./icons/game.svg#icon-user" />
+                    </svg>
+                    Account
+                </a>
             </h3>
         </header>`
     }

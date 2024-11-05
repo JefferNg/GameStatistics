@@ -26,14 +26,14 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var homePage_exports = {};
-__export(homePage_exports, {
-  HomePage: () => HomePage
+var accountPage_exports = {};
+__export(accountPage_exports, {
+  AccountPage: () => AccountPage
 });
-module.exports = __toCommonJS(homePage_exports);
+module.exports = __toCommonJS(accountPage_exports);
 var import_server = require("@calpoly/mustang/server");
 var import_renderPage = __toESM(require("./renderPage"));
-class HomePage {
+class AccountPage {
   data;
   constructor(data) {
     this.data = data;
@@ -41,10 +41,10 @@ class HomePage {
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
-      stylesheets: ["/styles/index.css"],
+      stylesheets: ["/styles/account.css"],
       scripts: [
         `import { define } from "@calpoly/mustang";
-                import { GameElement } from "./scripts/game.js";
+                import { GameElement } from "../scripts/game.js";
 
                 define({
                     "game-card": GameElement,
@@ -54,53 +54,46 @@ class HomePage {
   }
   renderBody() {
     const header = this.renderHeader();
-    const { games } = this.data;
-    const gamesList = games.map((game) => {
+    const {
+      userId,
+      username,
+      profilePicture,
+      ratedGames
+    } = this.data;
+    const gamesList = ratedGames.map((game) => {
       return this.renderGame(game);
     });
     return import_server.html`
         <body>
             ${header}
-            <div class="game-layout">
-                ${gamesList}
+            <a href="../">Back to Main</a>
+            <div id="games-rated">
+                <h1>Games you Rated</h1>
+                <div class="game-layout">
+                 ${gamesList}
+                </div>
             </div>
-        </body>`;
+        </body>
+        `;
   }
   renderHeader() {
     return import_server.html`
-        <header>
-            <h1>Steam Games Essentials</h1>
-            <div>
-                <a href="./rating.html"> Games Rated </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
-            </div>
-            <div>
-                <a href="./review.html"> Games you Reviewed </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-review" /></svg>
-            </div>
-            <div>
-                <a href="./recommendation.html"> Recommended Games </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
-            </div>
-            <div>
-                Money spend on games
-                <svg class="icon"><use href="./icons/game.svg#icon-money" /></svg>
+        <header id="account-head">
+            <div id="account-logo">
+                <h1>Username</h1>
+                <svg class="icon" id="account-icon">
+                <use href="../icons/game.svg#icon-user" />
+                </svg>
             </div>
             <label
                 onchange="event.stopPropagation();
-                toggleDarkMode(document.body, event.target.checked)">
+                toggleDarkMode(document.body, event.target.checked)"
+            >
                 <input type="checkbox" />
                 Dark mode
             </label>
-            <h3>
-                <a href="../account/1">
-                    <svg class="icon">
-                    <use href="./icons/game.svg#icon-user" />
-                    </svg>
-                    Account
-                </a>
-            </h3>
-        </header>`;
+        </header>
+        `;
   }
   renderGame(game) {
     const { name, price, genre, rating, playerCount } = game;
@@ -116,5 +109,5 @@ class HomePage {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  HomePage
+  AccountPage
 });
