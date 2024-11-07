@@ -75,16 +75,8 @@ class HomePage {
                 <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
             </div>
             <div>
-                <a href="./review.html"> Games you Reviewed </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-review" /></svg>
-            </div>
-            <div>
                 <a href="./recommendation.html"> Recommended Games </a>
                 <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
-            </div>
-            <div>
-                Money spend on games
-                <svg class="icon"><use href="./icons/game.svg#icon-money" /></svg>
             </div>
             <label
                 onchange="event.stopPropagation();
