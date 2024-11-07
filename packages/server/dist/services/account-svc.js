@@ -51,7 +51,26 @@ function get(userId) {
     throw `${userId} not found`;
   });
 }
-var account_svc_default = { index, get };
+function create(json) {
+  const t = new AccountModel(json);
+  return t.save();
+}
+function update(userId, account2) {
+  return AccountModel.findOneAndUpdate(
+    { userId },
+    account2,
+    { new: true }
+  ).then((updated) => {
+    if (!updated) throw `${userId} not updated`;
+    else return updated;
+  });
+}
+function remove(userId) {
+  return AccountModel.findOneAndDelete({ userId }).then((deleted) => {
+    if (!deleted) throw `${userId} not deleted`;
+  });
+}
+var account_svc_default = { index, get, create, update, remove };
 function getAccount(_) {
   return account;
 }

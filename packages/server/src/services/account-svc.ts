@@ -37,7 +37,30 @@ function get(userId: String): Promise<Account> {
     });
 }
 
-export default {index, get}
+function create(json: Account): Promise<Account> {
+    const t = new AccountModel(json);
+    return t.save();
+}
+
+function update(userId: String, account: Account): Promise<Account> {
+    return AccountModel.findOneAndUpdate(
+        { userId }, 
+        account, 
+        { new: true })
+    .then((updated) => {
+        if (!updated) throw `${userId} not updated`;
+        else return updated as Account;
+    });
+}
+
+function remove(userId: String): Promise<void> {
+    return AccountModel.findOneAndDelete({ userId })
+    .then((deleted) => {
+        if (!deleted) throw `${userId} not deleted`;
+    });
+}
+
+export default {index, get, create, update, remove};
 
 export function getAccount(_: string) {
     return account;
