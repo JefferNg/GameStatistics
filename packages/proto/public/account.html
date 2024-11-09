@@ -15,9 +15,11 @@
     <script type="module">
       import { define } from "@calpoly/mustang";
       import { GameElement } from "./scripts/game.js";
+      import { AccountElement } from "./scripts/account.js";
 
       define({
         "game-card": GameElement,
+        "account-card": AccountElement,
       });
     </script>
     <script>
@@ -38,35 +40,36 @@
     </script>
   </head>
   <body>
-    <header id="account-head">
-      <div id="account-logo">
-        <h1>Username</h1>
-        <svg class="icon" id="account-icon">
-          <use href="./icons/game.svg#icon-user" />
-        </svg>
-      </div>
-      <label
-        onchange="event.stopPropagation();
-        toggleDarkMode(document.body, event.target.checked)"
-      >
-        <input type="checkbox" />
-        Dark mode
-      </label>
-    </header>
-    <a href="./index.html">Back to Main</a>
-    <div id="games-rated">
-      <h1>Games you Rated</h1>
-      <div class="game-layout">
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Cats</h1>
-            <li slot="price">Price: Free</li>
-            <li slot="genre">Genre: Clicker</li>
-            <li slot="rating">Rating: 7.4</li>
-            <li slot="player-count">Current Players: 21,841</li>
-          </game-card></a
+    <account-card>
+      <header slot="acc-head" id="account-head">
+        <div id="account-logo">
+          <h1 slot="name">Username</h1>
+          <svg slot="profile-pic" class="icon" id="account-icon">
+            <use href="./icons/game.svg#icon-user" />
+          </svg>
+        </div>
+        <label
+          onchange="event.stopPropagation();
+            toggleDarkMode(document.body, event.target.checked)"
         >
+          <input type="checkbox" />
+          Dark mode
+        </label>
+      </header>
+      <div slot="games-rated" id="games-rated">
+        <h1>Games you Rated</h1>
+        <div slot="games" class="game-layout">
+          <a href="./game.html"
+            ><game-card>
+              <h1 slot="game-name">Cats</h1>
+              <li slot="price">Price: Free</li>
+              <li slot="genre">Genre: Clicker</li>
+              <li slot="rating">Rating: 7.4</li>
+              <li slot="player-count">Current Players: 21,841</li>
+            </game-card></a
+          >
+        </div>
       </div>
-    </div>
+    </account-card>
   </body>
 </html>

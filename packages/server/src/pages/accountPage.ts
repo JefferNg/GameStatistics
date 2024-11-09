@@ -16,54 +16,60 @@ export class AccountPage {
             scripts: [
                 `import { define } from "@calpoly/mustang";
                 import { GameElement } from "../scripts/game.js";
+                import { AccountElement} from "../scripts/account.js";
 
                 define({
                     "game-card": GameElement,
+                    "account-card": AccountElement,
                 });`
             ]
         });
     }
 
     renderBody() {
-        const header = this.renderHeader();
         const {
             userId,
             username,
             profilePicture,
             ratedGames
         } = this.data;
+        const header = this.renderHeader(username);
         const gamesList = ratedGames.map((game) => {
             return this.renderGame(game);
         });
         return html `
         <body>
-            ${header}
-            <a href="../">Back to Main</a>
-            <div id="games-rated">
-                <h1>Games you Rated</h1>
-                <div class="game-layout">
-                 ${gamesList}
+            <account-card>
+                ${header}
+                <a href="../">Back to Main</a>
+                <div slot="games-rated" id="games-rated">
+                    <h1>Games you Rated</h1>
+                    <div slot="games" class="game-layout">
+                    ${gamesList}
+                    </div>
                 </div>
-            </div>
+            </account-card>
         </body>
         `
     }
 
-    renderHeader() {
+    renderHeader(username: string, profilePicture?: string) {
+        profilePicture = profilePicture ? profilePicture : "../icons/game.svg#icon-user"
+        
         return html `
-        <header id="account-head">
+        <header slot="acc-head" id="account-head">
             <div id="account-logo">
-                <h1>Username</h1>
-                <svg class="icon" id="account-icon">
-                <use href="../icons/game.svg#icon-user" />
-                </svg>
+            <h1 slot="name">${username}</h1>
+            <svg slot="profile-pic" class="icon" id="account-icon">
+                <use href=${profilePicture} />
+            </svg>
             </div>
             <label
-                onchange="event.stopPropagation();
+            onchange="event.stopPropagation();
                 toggleDarkMode(document.body, event.target.checked)"
             >
-                <input type="checkbox" />
-                Dark mode
+            <input type="checkbox" />
+            Dark mode
             </label>
         </header>
         `
