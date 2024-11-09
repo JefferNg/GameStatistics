@@ -2,13 +2,69 @@ import { css, html, shadow} from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
 
 export class AccountElement extends HTMLElement {
+    
+    get src() {
+        return this.getAttribute("src");
+    }
+
+    connectedCallback() {
+        if (this.src) this.hydrate(this.src);
+    }
+
+    hydrate(url) {
+        fetch(url)
+        .then((res) => {
+            if (res.status !== 200) throw `Status: ${res.status}`;
+            return res.json();
+        })
+        .then((json) => this.renderSlots(json))
+        .catch((error) => console.log(`Failed to render data ${url}:`, error));
+    }
+
+    renderSlots(json) {
+        const entries = Object.entries(json);
+        // const toSlots = ([key, value]) => html`
+        // <span slot="${key}"> ${value} </span>`
+        const toSlots = ([key, value]) => {
+            switch(key) {
+                case "username":
+                    return html`
+                    <h1 slot="name"> ${value} </h1>`;
+                case "profilePicture":
+                    return html`
+                    <svg slot="profile-pic" class="icon" id="account-icon">
+                        <use href="../icons/game.svg#icon-user" />
+                    </svg>`;
+            }
+            switch (typeof value) {
+                case "object":
+                    if (Array.isArray(value)) {
+                        return html`
+                        <div slot="games-rated" class="game-layout">
+                            <div class="game-layout">
+                            <a href="./game.html">
+                            <game-card>
+                            ${value.map((s) => html`<li>${s}</li>`)}
+                            </game-card>
+                            </a>
+                            </div>
+                        </div>`;
+                    }
+            }
+        }
+
+        const fragment = entries.map(toSlots);
+        this.replaceChildren(...fragment);
+    }
+    
     static template = html`
     <template>
-        <slot name="acc-head"><header id="account-head">
+        <slot name="acc-head">
+        <header id="account-head">
             <div id="account-logo">
             <slot name="name"><h1>Username</h1></slot>
             <slot name="profile-pic"><svg class="icon" id="account-icon">
-                <use href="./icons/game.svg#icon-user" />
+                <use href="../icons/game.svg#icon-user" />
             </svg></slot>
             </div>
             <label
@@ -18,7 +74,8 @@ export class AccountElement extends HTMLElement {
             <input type="checkbox" />
             Dark mode
             </label>
-      </header></slot>
+      </header>
+      </slot>
       <a href="./index.html">Back to Main</a>
       <slot name="games-rated">
         <div id="games-rated">

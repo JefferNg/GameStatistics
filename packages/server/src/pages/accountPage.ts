@@ -38,18 +38,18 @@ export class AccountPage {
             return this.renderGame(game);
         });
         return html `
-        <body>
-            <account-card>
-                ${header}
+        
+            <account-card src="/api/accounts/1">
+                <!-- ${header}
                 <a href="../">Back to Main</a>
                 <div slot="games-rated" id="games-rated">
                     <h1>Games you Rated</h1>
                     <div slot="games" class="game-layout">
                     ${gamesList}
                     </div>
-                </div>
+                </div> -->
             </account-card>
-        </body>
+        
         `
     }
 
