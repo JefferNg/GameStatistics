@@ -5,39 +5,83 @@
     <link rel="stylesheet" href="styles/rating.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define } from "@calpoly/mustang";
+      import { GameElement } from "./scripts/game.js";
+
+      define({
+        "game-card": GameElement,
+      });
+    </script>
+    <script>
+      document.body.addEventListener("dark-mode:toggle", (event) => {
+        const page = event.currentTarget;
+        const checked = event.detail.checked;
+        page.classList.toggle("dark-mode", checked);
+      });
+
+      function toggleDarkMode(target, checked) {
+        const customEvent = new CustomEvent("dark-mode:toggle", {
+          bubbles: true,
+          detail: { checked },
+        });
+        target.dispatchEvent(customEvent);
+      }
+      window.toggleDarkMode = toggleDarkMode;
+    </script>
   </head>
   <body>
     <header id="rate-head">
-      <h1>Rating</h1>
-      <svg class="icon" id="rate-icon">
-        <use href="./icons/game.svg#icon-rate" />
-      </svg>
+      <div id="rate-logo">
+        <h1>Rating</h1>
+        <svg class="icon" id="rate-icon">
+          <use href="./icons/game.svg#icon-rate" />
+        </svg>
+      </div>
+      <label
+        onchange="event.stopPropagation();
+        toggleDarkMode(document.body, event.target.checked)"
+      >
+        <input type="checkbox" />
+        Dark mode
+      </label>
     </header>
     <a href="./index.html">Back to Main</a>
-    <!-- <div class="rating">
-      <label>
-        <input type="radio" name="recommends" />
-        Recommend
-      </label>
-      <label>
-        <input type="radio" name="recommends" />
-        Not Recommend
-      </label>
-    </div>
-    <p>Review</p> -->
     <div class="game-layout">
-      <p>
-        This will contain game components that the user has rated. Ideally, this
-        will connect to their Steam account.
-      </p>
-      <p>
-        This will contain game components that the user has rated. Ideally, this
-        will connect to their Steam account.
-      </p>
-      <p>
-        This will contain game components that the user has rated. Ideally, this
-        will connect to their Steam account.
-      </p>
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Cats</h1>
+          <li slot="price">Price: Free</li>
+          <li slot="genre">Genre: Clicker</li>
+          <li slot="rating">Rating: 7.4</li>
+          <li slot="player-count">Current Players: 21,841</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Overwatch 2</h1>
+          <li slot="price">Price: Free</li>
+          <li slot="genre">Genre: Hero Shooter</li>
+          <li slot="rating">Rating: 2.1</li>
+          <li slot="player-count">Current Players: 28,284</li>
+        </game-card></a
+      >
+      <a href="./game.html"
+        ><game-card>
+          <h1 slot="game-name">Slay the Spire</h1>
+          <li slot="price">Price: $24.99</li>
+          <li slot="genre">Genre: Card Game</li>
+          <li slot="rating">Rating: 9.7</li>
+          <li slot="player-count">Current Players: 8,733</li>
+        </game-card></a
+      >
     </div>
   </body>
 </html>

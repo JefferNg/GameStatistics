@@ -1,5 +1,10 @@
 #rate-head {
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+#rate-logo {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 #rate-icon {
   width: var(--svg-icon-size-med);

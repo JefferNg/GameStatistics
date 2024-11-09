@@ -3,9 +3,6 @@ dl {
   flex-direction: column;
   align-items: center;
 }
-dd {
-  padding-left: 2em;
-}
 #rec-head {
   justify-content: flex-start;
 }
