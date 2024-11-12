@@ -41,7 +41,7 @@ class AccountPage {
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
-      stylesheets: ["/styles/account.css"],
+      stylesheets: ["../styles/account.css"],
       scripts: [
         `import { define } from "@calpoly/mustang";
                 import { GameElement } from "../scripts/game.js";
@@ -101,9 +101,9 @@ class AccountPage {
         `;
   }
   renderGame(game) {
-    const { name, price, genre, rating, playerCount } = game;
+    const { gameId, name, price, genre, rating, playerCount } = game;
     return import_server.html`
-        <a href="./game.html"><game-card>
+        <a href="../games/${gameId}"><game-card>
         <h1 slot="game-name">${name}</h1>
         <li slot="price">Price: ${price}</li>
         <li slot="genre">Genre: ${genre}</li>

@@ -2,6 +2,7 @@ import { Home } from "models";
 
 const games = {
     games: [{
+        gameId: "1",
         name: "The Sims 4",
         price: "$29.99",
         genre: "Life Sim",
@@ -9,6 +10,7 @@ const games = {
         playerCount: 30647
     },
     {
+        gameId: "2",
         name: "Stardew Valley",
         price: "$14.99",
         genre: "Farming Sim",
@@ -16,6 +18,7 @@ const games = {
         playerCount: 77436
     },
     {
+        gameId: "3",
         name: "Team Fortress 2",
         price: "Free",
         genre: "FPS",
@@ -23,6 +26,7 @@ const games = {
         playerCount: 37464
     },
     {
+        gameId: "4",
         name: "Grand Theft Auto 5",
         price: "$29.99",
         genre: "Open World",

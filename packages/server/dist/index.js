@@ -28,12 +28,16 @@ var import_mongo = require("./services/mongo");
 var import_accountPage = require("./pages/accountPage");
 var import_account_svc = __toESM(require("./services/account-svc"));
 var import_accounts = __toESM(require("./routes/accounts"));
+var import_gamePage = require("./pages/gamePage");
+var import_game_svc = __toESM(require("./services/game-svc"));
+var import_games = __toESM(require("./routes/games"));
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
 (0, import_mongo.connect)("gamedata");
 app.use(import_express.default.json());
 app.use("/api/accounts", import_accounts.default);
+app.use("/api/games", import_games.default);
 app.get("/hello", (req, res) => {
   res.send("Hello, World");
 });
@@ -46,11 +50,20 @@ app.get(
   }
 );
 app.get(
-  "/account/:accountId",
+  "/accounts/:userId",
   (req, res) => {
-    const { accountId } = req.params;
-    import_account_svc.default.get(accountId).then((data) => {
+    const { userId } = req.params;
+    import_account_svc.default.get(userId).then((data) => {
       res.set("Content-Type", "text/html").send(new import_accountPage.AccountPage(data).render());
+    });
+  }
+);
+app.get(
+  "/games/:gameId",
+  (req, res) => {
+    const { gameId } = req.params;
+    import_game_svc.default.get(gameId).then((data) => {
+      res.set("Content-Type", "text/html").send(new import_gamePage.GamePage(data).render());
     });
   }
 );

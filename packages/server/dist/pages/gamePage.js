@@ -26,14 +26,14 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var homePage_exports = {};
-__export(homePage_exports, {
-  HomePage: () => HomePage
+var gamePage_exports = {};
+__export(gamePage_exports, {
+  GamePage: () => GamePage
 });
-module.exports = __toCommonJS(homePage_exports);
+module.exports = __toCommonJS(gamePage_exports);
 var import_server = require("@calpoly/mustang/server");
 var import_renderPage = __toESM(require("./renderPage"));
-class HomePage {
+class GamePage {
   data;
   constructor(data) {
     this.data = data;
@@ -41,72 +41,56 @@ class HomePage {
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
-      stylesheets: ["/styles/index.css"],
-      scripts: [
-        `import { define } from "@calpoly/mustang";
-                import { GameElement } from "./scripts/game.js";
-
-                define({
-                    "game-card": GameElement,
-                });`
-      ]
+      stylesheets: ["../styles/game.css"],
+      scripts: []
     });
   }
   renderBody() {
-    const header = this.renderHeader();
-    const { games } = this.data;
-    const gamesList = games.map((game) => {
-      return this.renderGame(game);
-    });
+    const {
+      gameId,
+      name,
+      price,
+      genre,
+      rating,
+      playerCount
+    } = this.data;
     return import_server.html`
         <body>
-            ${header}
-            <div class="game-layout">
-                ${gamesList}
-            </div>
-        </body>`;
-  }
-  renderHeader() {
-    return import_server.html`
-        <header>
-            <h1>Steam Games Essentials</h1>
+            <header>
+            <h1>${name}</h1>
             <div>
                 <a href="./rating.html"> Games Rated </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
+                <svg class="icon"><use href="../icons/game.svg#icon-rate" /></svg>
             </div>
             <div>
                 <a href="./recommendation.html"> Recommended Games </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
+                <svg class="icon"><use href="../icons/game.svg#icon-rec" /></svg>
             </div>
-            <label
-                onchange="event.stopPropagation();
-                toggleDarkMode(document.body, event.target.checked)">
-                <input type="checkbox" />
-                Dark mode
-            </label>
             <h3>
-                <a href="/accounts/1">
-                    <svg class="icon">
-                    <use href="./icons/game.svg#icon-user" />
-                    </svg>
-                    Account
+                <a href="../accounts/1"
+                ><svg class="icon">
+                    <use href="../icons/game.svg#icon-user" />
+                </svg>
+                Account
                 </a>
             </h3>
-        </header>`;
-  }
-  renderGame(game) {
-    const { gameId, name, price, genre, rating, playerCount } = game;
-    return import_server.html`
-        <a href="/games/${gameId}"><game-card>
-        <h1 slot="game-name">${name}</h1>
-        <li slot="price">Price: ${price}</li>
-        <li slot="genre">Genre: ${genre}</li>
-        <li slot="rating">Rating: ${rating}</li>
-        <li slot="player-count">Current Players: ${playerCount}</li>
-        </game-card></a>`;
+            </header>
+            <a href="../">Back to Main</a>
+            <div
+            id="game-content"
+            style="background-image: url('../image/video-game-background.png')"
+            >
+            <ul>
+                <li>${price}</li>
+                <li>${genre}</li>
+                <li>${rating}</li>
+                <li>${playerCount}</li>
+            </ul>
+            </div>
+        </body>`;
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  HomePage
+  GamePage
 });

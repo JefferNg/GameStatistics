@@ -59,7 +59,7 @@ export class HomePage {
                 Dark mode
             </label>
             <h3>
-                <a href="../account/1">
+                <a href="/accounts/1">
                     <svg class="icon">
                     <use href="./icons/game.svg#icon-user" />
                     </svg>
@@ -70,10 +70,10 @@ export class HomePage {
     }
 
     renderGame(game: Game) {
-        const {name, price, genre, rating, playerCount} = game;
+        const {gameId, name, price, genre, rating, playerCount} = game;
 
         return html `
-        <a href="./game.html"><game-card>
+        <a href="/games/${gameId}"><game-card>
         <h1 slot="game-name">${name}</h1>
         <li slot="price">Price: ${price}</li>
         <li slot="genre">Genre: ${genre}</li>

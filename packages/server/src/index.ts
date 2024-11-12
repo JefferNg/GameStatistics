@@ -5,6 +5,9 @@ import { connect } from "./services/mongo";
 import { AccountPage } from "./pages/accountPage";
 import Account from "./services/account-svc";
 import accounts from "./routes/accounts";
+import { GamePage } from "./pages/gamePage";
+import Game from "./services/game-svc";
+import games from "./routes/games";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,6 +16,7 @@ const staticDir = process.env.STATIC || "public";
 connect("gamedata");
 app.use(express.json());
 app.use("/api/accounts", accounts);
+app.use("/api/games", games);
 
 app.get("/hello", (req: Request, res: Response) => {
     res.send("Hello, World");
@@ -27,13 +31,24 @@ app.get("/",
     }
 )
 
-app.get("/account/:accountId",
+app.get("/accounts/:userId",
     (req: Request, res: Response) => {
-        const { accountId } = req.params;
+        const { userId } = req.params;
 
-        Account.get(accountId)
+        Account.get(userId)
         .then((data) => {
             res.set("Content-Type", "text/html").send(new AccountPage(data).render())
+        })
+    }
+)
+
+app.get("/games/:gameId",
+    (req: Request, res: Response) => {
+        const { gameId } = req.params;
+        
+        Game.get(gameId)
+        .then((data) => {
+            res.set("Content-Type", "text/html").send(new GamePage(data).render())
         })
     }
 )

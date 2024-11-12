@@ -12,7 +12,7 @@ export class AccountPage {
     render() {
         return renderPage({
             body: this.renderBody(),
-            stylesheets: ["/styles/account.css"],
+            stylesheets: ["../styles/account.css"],
             scripts: [
                 `import { define } from "@calpoly/mustang";
                 import { GameElement } from "../scripts/game.js";
@@ -37,7 +37,7 @@ export class AccountPage {
         const gamesList = ratedGames.map((game) => {
             return this.renderGame(game);
         });
-        return html `
+        return html`
         
             <account-card src="/api/accounts/1">
                 <!-- ${header}
@@ -56,7 +56,7 @@ export class AccountPage {
     renderHeader(username: string, profilePicture?: string) {
         profilePicture = profilePicture ? profilePicture : "../icons/game.svg#icon-user"
         
-        return html `
+        return html`
         <header slot="acc-head" id="account-head">
             <div id="account-logo">
             <h1 slot="name">${username}</h1>
@@ -76,10 +76,10 @@ export class AccountPage {
     }
 
     renderGame(game: Game) {
-        const {name, price, genre, rating, playerCount} = game;
+        const {gameId, name, price, genre, rating, playerCount} = game;
 
-        return html `
-        <a href="./game.html"><game-card>
+        return html`
+        <a href="../games/${gameId}"><game-card>
         <h1 slot="game-name">${name}</h1>
         <li slot="price">Price: ${price}</li>
         <li slot="genre">Genre: ${genre}</li>

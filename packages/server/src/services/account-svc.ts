@@ -6,6 +6,7 @@ const account = {
     userId: "1",
     username: "Admin",
     ratedGames: [{
+        gameId: "5",
         name: "Cats",
         price: "Free",
         genre: "Clicker",

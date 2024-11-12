@@ -1,4 +1,4 @@
-import { Game } from "./home";
+import { Game } from "./game";
 
 export interface Account {
     userId: string;

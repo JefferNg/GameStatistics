@@ -57,6 +57,7 @@ export class AccountElement extends HTMLElement {
         this.replaceChildren(...fragment);
     }
     
+    // might be changing the shadow dom
     static template = html`
     <template>
         <slot name="acc-head">
@@ -76,7 +77,7 @@ export class AccountElement extends HTMLElement {
             </label>
       </header>
       </slot>
-      <a href="./index.html">Back to Main</a>
+      <a href="../">Back to Main</a>
       <slot name="games-rated">
         <div id="games-rated">
             <h1>Games you Rated</h1>

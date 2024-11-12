@@ -4,6 +4,11 @@ header div {
   align-items: center;
   flex-wrap: wrap;
 }
+li {
+  color: black;
+  font-weight: var(--font-weight-strong);
+  font-size: x-large;
+}
 #game-content {
   height: 100vh;
   background-size: contain;
