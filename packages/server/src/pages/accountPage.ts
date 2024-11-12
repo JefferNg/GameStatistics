@@ -39,7 +39,7 @@ export class AccountPage {
         });
         return html`
         
-            <account-card src="/api/accounts/1">
+            <account-card src="/api/accounts/${userId}">
                 <!-- ${header}
                 <a href="../">Back to Main</a>
                 <div slot="games-rated" id="games-rated">

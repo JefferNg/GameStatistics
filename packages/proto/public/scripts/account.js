@@ -1,5 +1,6 @@
 import { css, html, shadow} from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
+import pages from "./styles/page.css.js";
 
 export class AccountElement extends HTMLElement {
     
@@ -40,15 +41,23 @@ export class AccountElement extends HTMLElement {
                 case "object":
                     if (Array.isArray(value)) {
                         return html`
-                        <div slot="games-rated" class="game-layout">
-                            <div class="game-layout">
-                            <a href="./game.html">
-                            <game-card>
-                            ${value.map((s) => html`<li>${s}</li>`)}
+                        
+                        ${value.map((s) => {
+                            
+                            return html`
+                            <a slot="game-link" href="../game.html">
+                            <game-card slot="games">
+                            <h1 slot="game-name">${s["name"]}</h1>
+                            <li slot="price">Price: ${s["price"]}</li>
+                            <li slot="genre">Genre: ${s["genre"]}</li>
+                            <li slot="rating">Rating: ${s["rating"]}</li>
+                            <li slot="player-count">Current Players: ${s["playerCount"]}</li>
                             </game-card>
                             </a>
-                            </div>
-                        </div>`;
+                            `
+                            })}
+                            
+                            `;
                     }
             }
         }
@@ -60,8 +69,7 @@ export class AccountElement extends HTMLElement {
     // might be changing the shadow dom
     static template = html`
     <template>
-        <slot name="acc-head">
-        <header id="account-head">
+        <header>
             <div id="account-logo">
             <slot name="name"><h1>Username</h1></slot>
             <slot name="profile-pic"><svg class="icon" id="account-icon">
@@ -76,32 +84,30 @@ export class AccountElement extends HTMLElement {
             Dark mode
             </label>
       </header>
-      </slot>
       <a href="../">Back to Main</a>
-      <slot name="games-rated">
-        <div id="games-rated">
-            <h1>Games you Rated</h1>
-            <slot name="games">
-                <div class="game-layout">
-                <a href="./game.html"
-                    ><game-card>
-                    <h1 slot="game-name">Name</h1>
-                    <li slot="price">Price: Price</li>
-                    <li slot="genre">Genre: Genre</li>
-                    <li slot="rating">Rating: Rating</li>
-                    <li slot="player-count">Current Players: Players playing</li>
-                    </game-card></a
-                >
-                </div>
+      
+    <div id="games-rated">
+        <h1>Games you Rated</h1>
+        <div class="game-layout">
+        <slot name="game-link">
+        <a href="../game.html">  
+        <slot name="games">
+            <game-card>
+            <h1 slot="game-name">Name</h1>
+            <li slot="price">Price: Price</li>
+            <li slot="genre">Genre: Genre</li>
+            <li slot="rating">Rating: Rating</li>
+            <li slot="player-count">Current Players: Players playing</li>
+            </game-card>
+            </slot>
+            </a>
             </slot>
         </div>
-      </slot>
+    </div>
+        
     </template>`;
 
     static style = css`
-    #account-head {
-        justify-content: space-between;
-    }
     #account-logo {
         display: flex;
         flex-wrap: nowrap;
@@ -117,6 +123,6 @@ export class AccountElement extends HTMLElement {
         super();
         shadow(this)
         .template(AccountElement.template)
-        .styles(reset.styles, AccountElement.style);
+        .styles(reset.styles, pages.styles, AccountElement.style);
     }
 }
