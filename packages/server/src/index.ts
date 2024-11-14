@@ -10,6 +10,8 @@ import Game from "./services/game-svc";
 import games from "./routes/games";
 import { getGamesOnGenre, getGamesOnPrice, getGamesOnRating } from "./services/recommendation-svc";
 import { RecommendationPage } from "./pages/recommendationPage";
+import { getRatedGame } from "./services/rating-svc";
+import { RatingPage } from "./pages/ratingPage";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -52,6 +54,15 @@ app.get("/games/:gameId",
         .then((data) => {
             res.set("Content-Type", "text/html").send(new GamePage(data).render())
         })
+    }
+)
+
+app.get("/ratings", 
+    (req: Request, res: Response) => {
+        const games = getRatedGame()
+        const page = new RatingPage(games);
+
+        res.set("Content-Type", "text/html").send(page.render());
     }
 )
 

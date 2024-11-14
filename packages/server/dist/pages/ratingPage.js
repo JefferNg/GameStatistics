@@ -26,71 +26,74 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var gamePage_exports = {};
-__export(gamePage_exports, {
-  GamePage: () => GamePage
+var ratingPage_exports = {};
+__export(ratingPage_exports, {
+  RatingPage: () => RatingPage
 });
-module.exports = __toCommonJS(gamePage_exports);
+module.exports = __toCommonJS(ratingPage_exports);
 var import_server = require("@calpoly/mustang/server");
 var import_renderPage = __toESM(require("./renderPage"));
-class GamePage {
-  data;
-  constructor(data) {
-    this.data = data;
+class RatingPage {
+  games;
+  constructor(games) {
+    this.games = games;
   }
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
-      stylesheets: ["../styles/game.css"],
-      scripts: []
+      stylesheets: ["/styles/rating.css"],
+      scripts: [
+        `import { define } from "@calpoly/mustang";
+                import { GameElement } from "./scripts/game.js";
+
+                define({
+                    "game-card": GameElement,
+                });`
+      ]
     });
   }
   renderBody() {
-    const {
-      gameId,
-      name,
-      price,
-      genre,
-      rating,
-      playerCount
-    } = this.data;
+    const { games } = this.games;
+    const gamesList = games.map((game) => {
+      return this.renderGame(game);
+    });
     return import_server.html`
         <body>
-            <header>
-            <h1>${name}</h1>
-            <div>
-                <a href="../ratings"> Games Rated </a>
-                <svg class="icon"><use href="../icons/game.svg#icon-rate" /></svg>
-            </div>
-            <div>
-                <a href="../recommendations"> Recommended Games </a>
-                <svg class="icon"><use href="../icons/game.svg#icon-rec" /></svg>
-            </div>
-            <h3>
-                <a href="../accounts/1"
-                ><svg class="icon">
-                    <use href="../icons/game.svg#icon-user" />
+            <header id="rate-head">
+            <div id="rate-logo">
+                <h1>Rating</h1>
+                <svg class="icon" id="rate-icon">
+                <use href="../icons/game.svg#icon-rate" />
                 </svg>
-                Account
-                </a>
-            </h3>
+            </div>
+            <label
+                onchange="event.stopPropagation();
+                toggleDarkMode(document.body, event.target.checked)"
+            >
+                <input type="checkbox" />
+                Dark mode
+            </label>
             </header>
             <a href="../">Back to Main</a>
-            <div
-            id="game-content"
-            style="background-image: url('../image/video-game-background.png')"
-            >
-            <ul>
-                <li>${price}</li>
-                <li>${genre}</li>
-                <li>${rating}</li>
-                <li>${playerCount}</li>
-            </ul>
+            <div class="game-layout">
+                ${gamesList}
             </div>
-        </body>`;
+        </body>
+        `;
+  }
+  renderGame(game) {
+    const { gameId, name, price, genre, rating, playerCount } = game;
+    return import_server.html`
+        <a href="/games/${gameId}"><game-card>
+        <h1 slot="game-name">${name}</h1>
+        <li slot="price">Price: ${price}</li>
+        <li slot="genre">Genre: ${genre}</li>
+        <li slot="rating">Rating: ${rating}</li>
+        <li slot="player-count">Current Players: ${playerCount}</li>
+        </game-card></a>`;
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  GamePage
+  RatingPage
 });

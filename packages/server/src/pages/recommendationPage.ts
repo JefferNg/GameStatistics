@@ -17,7 +17,14 @@ export class RecommendationPage {
         return renderPage({
             body: this.renderBody(),
             stylesheets: ["/styles/recommendation.css"],
-            scripts: []            
+            scripts: [
+                `import { define } from "@calpoly/mustang";
+                import { GameElement } from "./scripts/game.js";
+
+                define({
+                    "game-card": GameElement,
+                });`
+            ]            
         })
     }
 

@@ -71,7 +71,7 @@ class HomePage {
         <header>
             <h1>Steam Games Essentials</h1>
             <div>
-                <a href="./rating.html"> Games Rated </a>
+                <a href="./ratings"> Games Rated </a>
                 <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
             </div>
             <div>

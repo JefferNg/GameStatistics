@@ -46,7 +46,14 @@ class RecommendationPage {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
       stylesheets: ["/styles/recommendation.css"],
-      scripts: []
+      scripts: [
+        `import { define } from "@calpoly/mustang";
+                import { GameElement } from "./scripts/game.js";
+
+                define({
+                    "game-card": GameElement,
+                });`
+      ]
     });
   }
   renderBody() {
