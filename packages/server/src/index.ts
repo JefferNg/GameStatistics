@@ -8,6 +8,8 @@ import accounts from "./routes/accounts";
 import { GamePage } from "./pages/gamePage";
 import Game from "./services/game-svc";
 import games from "./routes/games";
+import { getGamesOnGenre, getGamesOnPrice, getGamesOnRating } from "./services/recommendation-svc";
+import { RecommendationPage } from "./pages/recommendationPage";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -50,6 +52,17 @@ app.get("/games/:gameId",
         .then((data) => {
             res.set("Content-Type", "text/html").send(new GamePage(data).render())
         })
+    }
+)
+
+app.get("/recommendations", 
+    (req: Request, res: Response) => {
+        const genreGames = getGamesOnGenre();
+        const pricegames = getGamesOnPrice();
+        const ratingGames = getGamesOnRating();
+        const page = new RecommendationPage(genreGames, pricegames, ratingGames);
+
+        res.set("Content-Type", "text/html").send(page.render());
     }
 )
 

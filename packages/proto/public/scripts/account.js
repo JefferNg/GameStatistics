@@ -45,8 +45,8 @@ export class AccountElement extends HTMLElement {
                         ${value.map((s) => {
                             
                             return html`
-                            <a slot="game-link" href="../game.html">
-                            <game-card slot="games">
+                            <a slot="games" href="../games/${s["gameId"]}">
+                            <game-card>
                             <h1 slot="game-name">${s["name"]}</h1>
                             <li slot="price">Price: ${s["price"]}</li>
                             <li slot="genre">Genre: ${s["genre"]}</li>
@@ -89,19 +89,19 @@ export class AccountElement extends HTMLElement {
     <div id="games-rated">
         <h1>Games you Rated</h1>
         <div class="game-layout">
-        <slot name="game-link">
-        <a href="../game.html">  
+        
         <slot name="games">
-            <game-card>
-            <h1 slot="game-name">Name</h1>
-            <li slot="price">Price: Price</li>
-            <li slot="genre">Genre: Genre</li>
-            <li slot="rating">Rating: Rating</li>
-            <li slot="player-count">Current Players: Players playing</li>
-            </game-card>
-            </slot>
-            </a>
-            </slot>
+            <a href="../game.html">  
+                <game-card>
+                <h1 slot="game-name">Name</h1>
+                <li slot="price">Price: Price</li>
+                <li slot="genre">Genre: Genre</li>
+                <li slot="rating">Rating: Rating</li>
+                <li slot="player-count">Current Players: Players playing</li>
+                </game-card>
+             </a>
+        </slot>
+        
         </div>
     </div>
         
@@ -116,6 +116,9 @@ export class AccountElement extends HTMLElement {
     #account-icon {
         width: var(--svg-icon-size-med);
         height: var(--svg-icon-size-med);
+    }
+    ::slotted(a) {
+        text-decoration: none;
     }
     `;
 

@@ -35,7 +35,7 @@ export class GamePage {
                 <svg class="icon"><use href="../icons/game.svg#icon-rate" /></svg>
             </div>
             <div>
-                <a href="./recommendation.html"> Recommended Games </a>
+                <a href="../recommendations"> Recommended Games </a>
                 <svg class="icon"><use href="../icons/game.svg#icon-rec" /></svg>
             </div>
             <h3>

@@ -31,6 +31,8 @@ var import_accounts = __toESM(require("./routes/accounts"));
 var import_gamePage = require("./pages/gamePage");
 var import_game_svc = __toESM(require("./services/game-svc"));
 var import_games = __toESM(require("./routes/games"));
+var import_recommendation_svc = require("./services/recommendation-svc");
+var import_recommendationPage = require("./pages/recommendationPage");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
@@ -65,6 +67,16 @@ app.get(
     import_game_svc.default.get(gameId).then((data) => {
       res.set("Content-Type", "text/html").send(new import_gamePage.GamePage(data).render());
     });
+  }
+);
+app.get(
+  "/recommendations",
+  (req, res) => {
+    const genreGames = (0, import_recommendation_svc.getGamesOnGenre)();
+    const pricegames = (0, import_recommendation_svc.getGamesOnPrice)();
+    const ratingGames = (0, import_recommendation_svc.getGamesOnRating)();
+    const page = new import_recommendationPage.RecommendationPage(genreGames, pricegames, ratingGames);
+    res.set("Content-Type", "text/html").send(page.render());
   }
 );
 app.listen(port, () => {

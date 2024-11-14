@@ -26,73 +26,66 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var homePage_exports = {};
-__export(homePage_exports, {
-  HomePage: () => HomePage
+var recommendationPage_exports = {};
+__export(recommendationPage_exports, {
+  RecommendationPage: () => RecommendationPage
 });
-module.exports = __toCommonJS(homePage_exports);
+module.exports = __toCommonJS(recommendationPage_exports);
 var import_server = require("@calpoly/mustang/server");
 var import_renderPage = __toESM(require("./renderPage"));
-class HomePage {
-  data;
-  constructor(data) {
-    this.data = data;
+class RecommendationPage {
+  genreGames;
+  priceGames;
+  ratingGames;
+  constructor(genreGames, priceGames, ratingGames) {
+    this.genreGames = genreGames;
+    this.priceGames = priceGames;
+    this.ratingGames = ratingGames;
   }
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
-      stylesheets: ["/styles/index.css"],
-      scripts: [
-        `import { define } from "@calpoly/mustang";
-                import { GameElement } from "./scripts/game.js";
-
-                define({
-                    "game-card": GameElement,
-                });`
-      ]
+      stylesheets: ["/styles/recommendation.css"],
+      scripts: []
     });
   }
   renderBody() {
-    const header = this.renderHeader();
-    const { games } = this.data;
-    const gamesList = games.map((game) => {
+    const genreGames = this.genreGames;
+    const priceGames = this.priceGames;
+    const ratingGames = this.ratingGames;
+    const genreGamesList = genreGames.games.map((game) => {
+      return this.renderGame(game);
+    });
+    const priceGamesList = priceGames.games.map((game) => {
+      return this.renderGame(game);
+    });
+    const ratingGamesList = ratingGames.games.map((game) => {
       return this.renderGame(game);
     });
     return import_server.html`
         <body>
-            ${header}
+            <header id="rec-head">
+            <h1>Recommendations</h1>
+            <svg class="icon" id="rec-icon">
+                <use href="./icons/game.svg#icon-rec" />
+            </svg>
+            </header>
+            <a href="../">Back to Main</a>
+            <dl>
+            <dt><h2>Based on Genre</h2></dt>
             <div class="game-layout">
-                ${gamesList}
+                ${genreGamesList}
             </div>
+            <dt><h2>Based on Price</h2></dt>
+            <div class="game-layout">
+                ${priceGamesList}
+            </div>
+            <dt><h2>Based on Rating</h2></dt>
+            <div class="game-layout">
+                ${ratingGamesList}
+            </div>
+            </dl>
         </body>`;
-  }
-  renderHeader() {
-    return import_server.html`
-        <header>
-            <h1>Steam Games Essentials</h1>
-            <div>
-                <a href="./rating.html"> Games Rated </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
-            </div>
-            <div>
-                <a href="./recommendations"> Recommended Games </a>
-                <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
-            </div>
-            <label
-                onchange="event.stopPropagation();
-                toggleDarkMode(document.body, event.target.checked)">
-                <input type="checkbox" />
-                Dark mode
-            </label>
-            <h3>
-                <a href="/accounts/1">
-                    <svg class="icon">
-                    <use href="./icons/game.svg#icon-user" />
-                    </svg>
-                    Account
-                </a>
-            </h3>
-        </header>`;
   }
   renderGame(game) {
     const { gameId, name, price, genre, rating, playerCount } = game;
@@ -108,5 +101,5 @@ class HomePage {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  HomePage
+  RecommendationPage
 });
