@@ -35,13 +35,16 @@ var import_recommendation_svc = require("./services/recommendation-svc");
 var import_recommendationPage = require("./pages/recommendationPage");
 var import_rating_svc = require("./services/rating-svc");
 var import_ratingPage = require("./pages/ratingPage");
+var import_auth = __toESM(require("./routes/auth"));
+var import_auth2 = require("./pages/auth");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
 (0, import_mongo.connect)("gamedata");
 app.use(import_express.default.json());
-app.use("/api/accounts", import_accounts.default);
+app.use("/api/accounts", import_auth.authenticateUser, import_accounts.default);
 app.use("/api/games", import_games.default);
+app.use("/auth", import_auth.default);
 app.get("/hello", (req, res) => {
   res.send("Hello, World");
 });
@@ -89,6 +92,10 @@ app.get(
     res.set("Content-Type", "text/html").send(page.render());
   }
 );
+app.get("/login", (req, res) => {
+  const page = new import_auth2.LoginPage();
+  res.set("Content-Type", "text/html").send(page.render());
+});
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

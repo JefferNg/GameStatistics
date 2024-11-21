@@ -12,6 +12,8 @@ import { getGamesOnGenre, getGamesOnPrice, getGamesOnRating } from "./services/r
 import { RecommendationPage } from "./pages/recommendationPage";
 import { getRatedGame } from "./services/rating-svc";
 import { RatingPage } from "./pages/ratingPage";
+import auth, { authenticateUser } from "./routes/auth";
+import { LoginPage } from "./pages/auth";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,8 +21,9 @@ const staticDir = process.env.STATIC || "public";
 
 connect("gamedata");
 app.use(express.json());
-app.use("/api/accounts", accounts);
+app.use("/api/accounts", authenticateUser, accounts);
 app.use("/api/games", games);
+app.use("/auth", auth);
 
 app.get("/hello", (req: Request, res: Response) => {
     res.send("Hello, World");
@@ -76,6 +79,11 @@ app.get("/recommendations",
         res.set("Content-Type", "text/html").send(page.render());
     }
 )
+
+app.get("/login", (req: Request, res: Response) => {
+    const page = new LoginPage();
+    res.set("Content-Type", "text/html").send(page.render());
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

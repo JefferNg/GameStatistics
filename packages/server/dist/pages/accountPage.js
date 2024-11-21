@@ -43,13 +43,14 @@ class AccountPage {
       body: this.renderBody(),
       stylesheets: ["../styles/account.css"],
       scripts: [
-        `import { define } from "@calpoly/mustang";
+        `import { define, Auth } from "@calpoly/mustang";
                 import { GameElement } from "../scripts/game.js";
                 import { AccountElement} from "../scripts/account.js";
 
                 define({
                     "game-card": GameElement,
                     "account-card": AccountElement,
+                    "mu-auth": Auth.Provider,
                 });`
       ]
     });
@@ -66,7 +67,8 @@ class AccountPage {
       return this.renderGame(game);
     });
     return import_server.html`
-        
+        <body>
+        <mu-auth provides="stats:auth">
             <account-card src="/api/accounts/${userId}">
                 <!-- ${header}
                 <a href="../">Back to Main</a>
@@ -77,7 +79,8 @@ class AccountPage {
                     </div>
                 </div> -->
             </account-card>
-        
+        </mu-auth>
+        </body>
         `;
   }
   renderHeader(username, profilePicture) {
