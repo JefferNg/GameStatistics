@@ -42,7 +42,14 @@ class GamePage {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
       stylesheets: ["../styles/game.css"],
-      scripts: []
+      scripts: [`
+                    import { define } from "@calpoly/mustang";
+                    import { GameProfileElement } from "../scripts/gameProfile.js";
+
+                    define({
+                        "game-profile": GameProfileElement,
+                    });
+                `]
     });
   }
   renderBody() {
@@ -57,36 +64,30 @@ class GamePage {
     return import_server.html`
         <body>
             <header>
-            <h1>${name}</h1>
-            <div>
-                <a href="../ratings"> Games Rated </a>
-                <svg class="icon"><use href="../icons/game.svg#icon-rate" /></svg>
-            </div>
-            <div>
-                <a href="../recommendations"> Recommended Games </a>
-                <svg class="icon"><use href="../icons/game.svg#icon-rec" /></svg>
-            </div>
-            <h3>
-                <a href="../accounts/1"
-                ><svg class="icon">
-                    <use href="../icons/game.svg#icon-user" />
-                </svg>
-                Account
-                </a>
-            </h3>
-            </header>
-            <a href="../">Back to Main</a>
-            <div
-            id="game-content"
-            style="background-image: url('../image/video-game-background.png')"
-            >
-            <ul>
-                <li>${price}</li>
-                <li>${genre}</li>
-                <li>${rating}</li>
-                <li>${playerCount}</li>
-            </ul>
-            </div>
+                <h1>${name}</h1>
+                <div>
+                    <a href="../ratings"> Games Rated </a>
+                    <svg class="icon"><use href="../icons/game.svg#icon-rate" /></svg>
+                </div>
+                <div>
+                    <a href="../recommendations"> Recommended Games </a>
+                    <svg class="icon"><use href="../icons/game.svg#icon-rec" /></svg>
+                </div>
+                <h3>
+                    <a href="../accounts/1"
+                    ><svg class="icon">
+                        <use href="../icons/game.svg#icon-user" />
+                    </svg>
+                    Account
+                    </a>
+                </h3>
+                </header>
+                <game-profile src="/api/games/${gameId}">
+                <!--        <li slot="price">Price: ${price}</li>
+                    <li slot="genre">Genre: ${genre}</li>
+                    <li slot="rating">Rating: ${rating}</li>
+                    <li slot="player-count">Current Players: ${playerCount}</li> -->
+                </game-profile> 
         </body>`;
   }
 }
