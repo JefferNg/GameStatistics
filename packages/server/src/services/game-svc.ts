@@ -16,7 +16,8 @@ const GameSchema = new Schema<Game>({
     price: {type: String, required: true, trim: true},
     genre: {type: String, required: true, trim: true},
     rating: {type: Number},
-    playerCount: {type: Number}
+    playerCount: {type: Number},
+    userRating: {type: String, trim: true}
 },
 {collection: "games"}
 )

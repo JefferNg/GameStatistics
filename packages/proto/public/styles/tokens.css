@@ -4,6 +4,9 @@
   --font-weight-strong: 700;
   --padding-normal: 0.5em;
 
+  --font-family-serif: Bitter, Palatino, Georgia, "Times New Roman", serif;
+  --font-family-san-serif: Prompt, Verdana, Tahoma, Arial, sans-serif;
+
   --color-text: #444;
   --color-background-page: papayawhip;
   --color-header: whitesmoke;

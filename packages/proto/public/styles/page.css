@@ -1,7 +1,7 @@
 body {
   background-color: var(--color-background-page);
   color: var(--color-text);
-  font-family: Bitter, Palatino, Georgia, "Times New Roman", serif;
+  font-family: var(--font-family-serif);
   font-weight: var(--font-weight-normal);
 }
 header {
@@ -13,7 +13,7 @@ header {
   padding: var(--padding-normal);
 }
 h1 {
-  font-family: Prompt, Verdana, Tahoma, Arial, sans-serif;
+  font-family: var(--font-family-san-serif);
   font-weight: var(--font-weight-strong);
   font-size: x-large;
 }

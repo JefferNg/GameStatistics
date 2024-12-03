@@ -5,4 +5,5 @@ export interface Game {
     genre: string;
     rating: number;
     playerCount: number; 
+    userRating?: string;
 }

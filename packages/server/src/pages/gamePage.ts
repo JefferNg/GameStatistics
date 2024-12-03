@@ -31,7 +31,8 @@ export class GamePage {
             price,
             genre,
             rating,
-            playerCount
+            playerCount,
+            userRating
         } = this.data
         return html`
         <body>

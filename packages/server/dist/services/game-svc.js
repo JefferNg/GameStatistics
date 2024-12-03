@@ -37,7 +37,8 @@ const GameSchema = new import_mongoose.Schema(
     price: { type: String, required: true, trim: true },
     genre: { type: String, required: true, trim: true },
     rating: { type: Number },
-    playerCount: { type: Number }
+    playerCount: { type: Number },
+    userRating: { type: String, trim: true }
   },
   { collection: "games" }
 );
