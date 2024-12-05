@@ -49,14 +49,16 @@
       }
       window.toggleDarkMode = toggleDarkMode;
     </script> -->
-    <script type="module" crossorigin src="/assets/index-B3hslQS6.js"></script>
+    <script type="module" crossorigin src="/assets/index-BSBZ1D7w.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BFQZ5GAn.css">
   </head>
   <body>
-    <mu-auth provides="stats:auth">
-      <page-header></page-header>
-      <stats-app></stats-app>
-      <!-- <div class="game-layout">
+    <mu-history provides="stats:history">
+      <mu-auth provides="stats:auth">
+        <!-- <page-header></page-header> -->
+        <mu-switch></mu-switch>
+        <!-- <stats-app></stats-app> -->
+        <!-- <div class="game-layout">
         <a href="./game.html"
           ><game-card>
             <h1 slot="game-name">The Sims 4</h1>
@@ -130,6 +132,7 @@
           </game-card></a
         >
       </div> -->
-    </mu-auth>
+      </mu-auth>
+    </mu-history>
   </body>
 </html>

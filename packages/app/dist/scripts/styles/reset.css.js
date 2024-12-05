@@ -1,4 +1,4 @@
-import { css } from "lit";
+import { css } from "@calpoly/mustang";
 
 const styles = css`
   * {
