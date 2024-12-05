@@ -1,0 +1,26 @@
+:root {
+  --font-weight-light: 200;
+  --font-weight-normal: 400;
+  --font-weight-strong: 700;
+  --padding-normal: 0.5em;
+
+  --font-family-serif: Bitter, Palatino, Georgia, "Times New Roman", serif;
+  --font-family-san-serif: Prompt, Verdana, Tahoma, Arial, sans-serif;
+
+  --color-text: #444;
+  --color-background-page: papayawhip;
+  --color-header: whitesmoke;
+  --color-background-header: rgb(81 39 131);
+  --color-link: currentColor;
+
+  --svg-icon-size-small: 2em;
+  --svg-icon-size-med: 4em;
+}
+
+body.dark-mode {
+  --color-text: whitesmoke;
+  --color-background-page: rgb(30, 0, 32);
+  --color-header: var(--color-background-page);
+  --color-background-header: papayawhip;
+  --color-link: currentColor;
+}

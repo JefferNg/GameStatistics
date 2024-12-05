@@ -1,0 +1,12 @@
+dl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#rec-head {
+  justify-content: flex-start;
+}
+#rec-icon {
+  width: var(--svg-icon-size-med);
+  height: var(--svg-icon-size-med);
+}

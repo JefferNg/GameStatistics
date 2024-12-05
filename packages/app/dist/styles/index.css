@@ -1,0 +1,6 @@
+header h3,
+header div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
