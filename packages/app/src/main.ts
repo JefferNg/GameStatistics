@@ -1,11 +1,12 @@
-import { Auth, define } from "@calpoly/mustang";
+import { Auth, define, History, Switch } from "@calpoly/mustang";
 import { html, LitElement } from "lit";
-import { PageHeaderElement } from "./components/page-header";
 import { HomeViewElement } from "./views/home-view";
+import { GameViewElement } from "./views/game-view";
 
 class AppElement extends LitElement {
   static uses = define({
     "home-view": HomeViewElement,
+    "game-view": GameViewElement,
   });
 
   protected render() {
@@ -14,12 +15,33 @@ class AppElement extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    PageHeaderElement.initializeOnce();
   }
 }
 
+const routes = [
+  {
+    path: "/app",
+    view: () => html` <home-view></home-view> `,
+  },
+  {
+    path: "/",
+    redirect: "/app",
+  },
+  {
+    path: "/app/games/:gameId",
+    view: (params: Switch.Params) => {
+      return html`<game-view gameId=${params.gameId}></game-view>`;
+    },
+  },
+];
+
 define({
-  "mu-auth": Auth.Provider,
   "stats-app": AppElement,
-  "page-header": PageHeaderElement,
+  "mu-auth": Auth.Provider,
+  "mu-history": History.Provider,
+  "mu-switch": class AppSwitch extends Switch.Element {
+    constructor() {
+      super(routes, "stats:history", "stats:auth");
+    }
+  },
 });

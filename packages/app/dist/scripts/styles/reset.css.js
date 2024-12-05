@@ -1,18 +1,18 @@
-import { css } from "@calpoly/mustang";
+import { css } from "lit";
 
 const styles = css`
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
+  * {
+    margin: 0;
+    box-sizing: border-box;
+  }
 
-body {
-  line-height: 1.5;
-}
+  body {
+    line-height: 1.5;
+  }
 
-img {
-  max-width: 100%;
-}
+  img {
+    max-width: 100%;
+  }
 `;
 
 export default { styles };

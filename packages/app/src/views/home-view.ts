@@ -3,12 +3,14 @@ import { css, html, LitElement } from "lit";
 import { state } from "lit/decorators.js";
 import { Game } from "server/models";
 import { GameCardElement } from "../components/game-card";
+import { PageHeaderElement } from "../components/page-header";
 
 export class HomeViewElement extends LitElement {
   src = "/api/games";
 
   static uses = define({
     "game-card": GameCardElement,
+    "page-header": PageHeaderElement,
   });
 
   @state()
@@ -17,13 +19,16 @@ export class HomeViewElement extends LitElement {
   render() {
     const gameList = this.gameIndex.map(this.renderItem);
 
-    return html` <div class="game-layout">${gameList}</div> `;
+    return html`
+      <page-header></page-header>
+      <div class="game-layout">${gameList}</div>
+    `;
   }
 
   renderItem(game: Game) {
     const { gameId, name, price, genre, rating, playerCount } = game;
 
-    return html` <a href="/games/${gameId}"
+    return html` <a href="/app/games/${gameId}"
       ><game-card>
         <h1 slot="game-name">${name}</h1>
         <li slot="price">Price: ${price}</li>
@@ -140,5 +145,6 @@ export class HomeViewElement extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     if (this.src) this.hydrate(this.src);
+    PageHeaderElement.initializeOnce();
   }
 }

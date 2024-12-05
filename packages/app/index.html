@@ -55,10 +55,12 @@
     <script type="module" src="/src/main"></script>
   </head>
   <body>
-    <mu-auth provides="stats:auth">
-      <page-header></page-header>
-      <stats-app></stats-app>
-      <!-- <div class="game-layout">
+    <mu-history provides="stats:history">
+      <mu-auth provides="stats:auth">
+        <!-- <page-header></page-header> -->
+        <mu-switch></mu-switch>
+        <!-- <stats-app></stats-app> -->
+        <!-- <div class="game-layout">
         <a href="./game.html"
           ><game-card>
             <h1 slot="game-name">The Sims 4</h1>
@@ -132,6 +134,7 @@
           </game-card></a
         >
       </div> -->
-    </mu-auth>
+      </mu-auth>
+    </mu-history>
   </body>
 </html>
