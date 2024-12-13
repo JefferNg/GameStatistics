@@ -1,6 +1,6 @@
 import { css, html } from "lit";
 import { property, state } from "lit/decorators.js";
-import { define, View } from "@calpoly/mustang";
+import { View, History } from "@calpoly/mustang";
 import { Msg } from "../messages";
 import { Model } from "../model";
 import { Game } from "server/models";
@@ -8,9 +8,6 @@ import { Game } from "server/models";
 export class GameViewElement extends View<Model, Msg> {
   @property()
   gameId?: string;
-
-  //   @state()
-  //   game?: Game;
 
   @state()
   get game(): Game | undefined {
@@ -32,63 +29,10 @@ export class GameViewElement extends View<Model, Msg> {
 
   attributeChangedCallback(name: string, oldVal: string, newVal: string) {
     super.attributeChangedCallback(name, oldVal, newVal);
+    this.mode = "view";
     if (name === "gameid" && oldVal !== newVal && newVal) {
       this.dispatchMessage(["game/select", { gameId: newVal }]);
     }
-  }
-
-  //   connectedCallback(): void {
-  //     super.connectedCallback();
-  //     this.url = `/api/games/${this.gameId}`;
-  //     this.hydrate(this.url);
-  //   }
-
-  //   hydrate(url: string) {
-  //     fetch(url)
-  //       .then((res: Response) => {
-  //         if (res.status === 200) return res.json();
-  //         throw `Server responded with status ${res.status}`;
-  //       })
-  //       .then((json: Game) => {
-  //         if (json) {
-  //           this.game = json;
-  //           console.log(json);
-  //         }
-  //       });
-  //   }
-
-  handleSubmit(event: CustomEvent) {
-    const form = event.detail;
-    const likeRating =
-      this.shadowRoot!.querySelector<HTMLInputElement>("input[id='like']");
-    const dislikeRating = this.shadowRoot!.querySelector<HTMLInputElement>(
-      "input[id='dislike']"
-    );
-    let selectedRating = null;
-
-    if (likeRating?.checked) selectedRating = "Like";
-    if (dislikeRating?.checked) selectedRating = "Dislike";
-
-    form.userRating = selectedRating;
-    delete form["user-rating"];
-    this.submit(this.url, form);
-  }
-
-  submit(url: string, json: unknown) {
-    const method = "PUT";
-    const headers = { "Content-Type": "application/json" };
-    const body = JSON.stringify(json);
-
-    fetch(url, { method, headers, body })
-      .then((res) => {
-        if (res.status !== 200)
-          throw `Server responded with status ${res.status}`;
-        return res.json();
-      })
-      .then((json) => {
-        this.form = json;
-      })
-      .catch((err) => console.log("Failed to render form: ", err));
   }
 
   render() {
@@ -131,19 +75,17 @@ export class GameViewElement extends View<Model, Msg> {
         <span
           ><slot name="user-rating"> ${userRating || "No Rating"} </slot></span
         >
-        <button id="edit" @click="${() => (this.mode = "edit")}">Edit</button>
+        <button
+          id="edit"
+          @click="${() =>
+            History.dispatch(this, "history/navigate", {
+              href: `/app/games/${this.gameId}/edit`,
+            })}"
+        >
+          Edit
+        </button>
       </section>
-      <mu-form class=${this.mode} @mu-form:submit=${this.handleSubmit}>
-        <span> Played this game? Rate it! </span>
-        <label id="rating">
-          <svg class="icon"><use href="../../icons/game.svg#icon-like" /></svg>
-          <input type="radio" id="like" name="user-rating" value="like" />
-          <svg class="icon">
-            <use href="../../icons/game.svg#icon-dislike" />
-          </svg>
-          <input type="radio" id="dislike" name="user-rating" value="dislike" />
-        </label>
-      </mu-form>
+      <mu-form class="edit" .init=${this.game}> </mu-form>
     `;
   }
 
@@ -194,14 +136,6 @@ export class GameViewElement extends View<Model, Msg> {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: 50% 0%;
-    }
-    #rating {
-      display: flex;
-      justify-content: space-around;
-    }
-    #rating svg {
-      width: var(--svg-icon-size-med);
-      height: var(--svg-icon-size-med);
     }
     :host {
       display: contents;

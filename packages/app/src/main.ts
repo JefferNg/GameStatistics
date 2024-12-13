@@ -5,11 +5,13 @@ import update from "./update";
 import { html, LitElement } from "lit";
 import { HomeViewElement } from "./views/home-view";
 import { GameViewElement } from "./views/game-view";
+import { GameEditElement } from "./views/game-edit";
 
 class AppElement extends LitElement {
   static uses = define({
     "home-view": HomeViewElement,
     "game-view": GameViewElement,
+    "game-edit": GameEditElement,
   });
 
   protected render() {
@@ -35,6 +37,11 @@ const routes = [
     view: (params: Switch.Params) => {
       return html`<game-view gameId=${params.gameId}></game-view>`;
     },
+  },
+  {
+    path: "/app/games/:gameId/edit",
+    view: (params: Switch.Params) =>
+      html`<game-edit gameId=${params.gameId}></game-edit>`,
   },
 ];
 

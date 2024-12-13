@@ -10,9 +10,16 @@ export default function update(
 ) {
   switch (message[0]) {
     case "game/save":
-      saveGame(message[1], user).then((game) =>
-        apply((model) => ({ ...model, game }))
-      );
+      saveGame(message[1])
+        .then((game) => apply((model) => ({ ...model, game })))
+        .then(() => {
+          const { onSuccess } = message[1];
+          if (onSuccess) onSuccess();
+        })
+        .catch((err: Error) => {
+          const { onFailure } = message[1];
+          if (onFailure) onFailure(err);
+        });
       break;
     case "game/select":
       selectGame(message[1]).then((game) =>
@@ -41,16 +48,21 @@ function selectGame(msg: { gameId: string }) {
     });
 }
 
-function saveGame(msg: { gameId: string }, user: Auth.User) {
-  return fetch(`/api/games/${msg.gameId}`, { headers: Auth.headers(user) })
+function saveGame(msg: { gameId: string; game: Game }) {
+  return fetch(`/api/games/${msg.gameId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(msg.game),
+  })
     .then((res: Response) => {
       if (res.status === 200) return res.json();
-      return undefined;
+      throw new Error(`Failed to save game for ${msg.gameId}`);
     })
     .then((json: unknown) => {
       if (json) {
         console.log("Game: ", json);
         return json as Game;
       }
+      return undefined;
     });
 }
