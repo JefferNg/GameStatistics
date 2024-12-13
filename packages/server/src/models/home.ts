@@ -1,5 +1,5 @@
-import { Game } from "models";
+import { Game } from "../models";
 
 export interface Home {
-    games: Array<Game>;
+  games: Array<Game>;
 }

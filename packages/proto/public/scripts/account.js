@@ -1,19 +1,24 @@
-import { css, html, shadow} from "@calpoly/mustang";
+import { css, Events, html, Observer, shadow} from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
 import pages from "./styles/page.css.js";
 
 export class AccountElement extends HTMLElement {
+    _authObserver = new Observer(this, "stats:auth");
     
     get src() {
         return this.getAttribute("src");
     }
 
     connectedCallback() {
-        if (this.src) this.hydrate(this.src);
+        this._authObserver.observe(({user}) => {
+            console.log(user)
+            this._user = user;
+            if (this.src) this.hydrate(this.src);
+        });
     }
 
     hydrate(url) {
-        fetch(url)
+        fetch(url, {headers: this.authorization})
         .then((res) => {
             if (res.status !== 200) throw `Status: ${res.status}`;
             return res.json();
@@ -30,7 +35,7 @@ export class AccountElement extends HTMLElement {
             switch(key) {
                 case "username":
                     return html`
-                    <h1 slot="name"> ${value} </h1>`;
+                    <h1 slot="name" id="userid"> ${value} </h1>`;
                 case "profilePicture":
                     return html`
                     <svg slot="profile-pic" class="icon" id="account-icon">
@@ -66,7 +71,6 @@ export class AccountElement extends HTMLElement {
         this.replaceChildren(...fragment);
     }
     
-    // might be changing the shadow dom
     static template = html`
     <template>
         <header>
@@ -76,13 +80,16 @@ export class AccountElement extends HTMLElement {
                 <use href="../icons/game.svg#icon-user" />
             </svg></slot>
             </div>
-            <label
-            onchange="event.stopPropagation();
-            toggleDarkMode(document.body, event.target.checked)"
-            >
-            <input type="checkbox" />
-            Dark mode
-            </label>
+            <div id="right-header-elements">
+                <label
+                onchange="event.stopPropagation();
+                toggleDarkMode(document.body, event.target.checked)"
+                >
+                <input type="checkbox" />
+                Dark mode
+                </label>
+                <a id="signout">Sign Out</a>
+            </div>
       </header>
       <a href="../">Back to Main</a>
       
@@ -117,6 +124,11 @@ export class AccountElement extends HTMLElement {
         width: var(--svg-icon-size-med);
         height: var(--svg-icon-size-med);
     }
+    #right-header-elements {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
     ::slotted(a) {
         text-decoration: none;
     }
@@ -127,5 +139,36 @@ export class AccountElement extends HTMLElement {
         shadow(this)
         .template(AccountElement.template)
         .styles(reset.styles, pages.styles, AccountElement.style);
+
+        this._signout = this.shadowRoot.querySelector("#signout");
+
+        this._signout.addEventListener("click", (event) => 
+            Events.relay(event, "auth:message", ["auth/signout"])
+        );
+    }
+
+    get userid() {
+        console.log(this._userid.textContent);
+        return this._userid.textContent;
+    }
+
+    set userid(id) {
+        if (id === "anonymous") {
+            this._userid.textContent = "";
+            this._signout.disabled = true;
+        }
+        else {
+            this._userid.textContent = id;
+            this._signout.disabled = false;
+        }
+    }
+
+    get authorization() {
+        console.log(this._user)
+        return(
+            this._user?.authenticated && {
+                Authorization: `Bearer ${this._user.token}`
+            }
+        );
     }
 }

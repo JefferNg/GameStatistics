@@ -14,13 +14,14 @@ export class AccountPage {
             body: this.renderBody(),
             stylesheets: ["../styles/account.css"],
             scripts: [
-                `import { define } from "@calpoly/mustang";
+                `import { define, Auth } from "@calpoly/mustang";
                 import { GameElement } from "../scripts/game.js";
                 import { AccountElement} from "../scripts/account.js";
 
                 define({
                     "game-card": GameElement,
                     "account-card": AccountElement,
+                    "mu-auth": Auth.Provider,
                 });`
             ]
         });
@@ -38,7 +39,8 @@ export class AccountPage {
             return this.renderGame(game);
         });
         return html`
-        
+        <body>
+        <mu-auth provides="stats:auth">
             <account-card src="/api/accounts/${userId}">
                 <!-- ${header}
                 <a href="../">Back to Main</a>
@@ -49,7 +51,8 @@ export class AccountPage {
                     </div>
                 </div> -->
             </account-card>
-        
+        </mu-auth>
+        </body>
         `
     }
 

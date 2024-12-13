@@ -35,60 +35,58 @@ var import_recommendation_svc = require("./services/recommendation-svc");
 var import_recommendationPage = require("./pages/recommendationPage");
 var import_rating_svc = require("./services/rating-svc");
 var import_ratingPage = require("./pages/ratingPage");
+var import_auth = __toESM(require("./routes/auth"));
+var import_auth2 = require("./pages/auth");
+var import_promises = __toESM(require("node:fs/promises"));
+var import_path = __toESM(require("path"));
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
 (0, import_mongo.connect)("gamedata");
 app.use(import_express.default.json());
-app.use("/api/accounts", import_accounts.default);
+app.use("/api/accounts", import_auth.authenticateUser, import_accounts.default);
 app.use("/api/games", import_games.default);
+app.use("/auth", import_auth.default);
+app.use("/app", (req, res) => {
+  const indexHTML = import_path.default.resolve(staticDir, "index.html");
+  import_promises.default.readFile(indexHTML, { encoding: "utf8" }).then((html) => res.send(html));
+});
 app.get("/hello", (req, res) => {
   res.send("Hello, World");
 });
-app.get(
-  "/",
-  (req, res) => {
-    const data = (0, import_home_svc.getGame)();
-    const page = new import_homePage.HomePage(data);
-    res.set("Content-Type", "text/html").send(page.render());
-  }
-);
-app.get(
-  "/accounts/:userId",
-  (req, res) => {
-    const { userId } = req.params;
-    import_account_svc.default.get(userId).then((data) => {
-      res.set("Content-Type", "text/html").send(new import_accountPage.AccountPage(data).render());
-    });
-  }
-);
-app.get(
-  "/games/:gameId",
-  (req, res) => {
-    const { gameId } = req.params;
-    import_game_svc.default.get(gameId).then((data) => {
-      res.set("Content-Type", "text/html").send(new import_gamePage.GamePage(data).render());
-    });
-  }
-);
-app.get(
-  "/ratings",
-  (req, res) => {
-    const games2 = (0, import_rating_svc.getRatedGame)();
-    const page = new import_ratingPage.RatingPage(games2);
-    res.set("Content-Type", "text/html").send(page.render());
-  }
-);
-app.get(
-  "/recommendations",
-  (req, res) => {
-    const genreGames = (0, import_recommendation_svc.getGamesOnGenre)();
-    const pricegames = (0, import_recommendation_svc.getGamesOnPrice)();
-    const ratingGames = (0, import_recommendation_svc.getGamesOnRating)();
-    const page = new import_recommendationPage.RecommendationPage(genreGames, pricegames, ratingGames);
-    res.set("Content-Type", "text/html").send(page.render());
-  }
-);
+app.get("/", (req, res) => {
+  const data = (0, import_home_svc.getGame)();
+  const page = new import_homePage.HomePage(data);
+  res.set("Content-Type", "text/html").send(page.render());
+});
+app.get("/accounts/:userId", (req, res) => {
+  const { userId } = req.params;
+  import_account_svc.default.get(userId).then((data) => {
+    res.set("Content-Type", "text/html").send(new import_accountPage.AccountPage(data).render());
+  });
+});
+app.get("/games/:gameId", (req, res) => {
+  const { gameId } = req.params;
+  import_game_svc.default.get(gameId).then((data) => {
+    res.set("Content-Type", "text/html").send(new import_gamePage.GamePage(data).render());
+  });
+});
+app.get("/ratings", (req, res) => {
+  const games2 = (0, import_rating_svc.getRatedGame)();
+  const page = new import_ratingPage.RatingPage(games2);
+  res.set("Content-Type", "text/html").send(page.render());
+});
+app.get("/recommendations", (req, res) => {
+  const genreGames = (0, import_recommendation_svc.getGamesOnGenre)();
+  const pricegames = (0, import_recommendation_svc.getGamesOnPrice)();
+  const ratingGames = (0, import_recommendation_svc.getGamesOnRating)();
+  const page = new import_recommendationPage.RecommendationPage(genreGames, pricegames, ratingGames);
+  res.set("Content-Type", "text/html").send(page.render());
+});
+app.get("/login", (req, res) => {
+  const page = new import_auth2.LoginPage();
+  res.set("Content-Type", "text/html").send(page.render());
+});
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
