@@ -6,12 +6,18 @@ import { html, LitElement } from "lit";
 import { HomeViewElement } from "./views/home-view";
 import { GameViewElement } from "./views/game-view";
 import { GameEditElement } from "./views/game-edit";
+import { AccountViewElement } from "./views/account-view";
+import { RatingViewElement } from "./views/rating-view";
+import { RecommendationViewElement } from "./views/recommendation-view";
 
 class AppElement extends LitElement {
   static uses = define({
     "home-view": HomeViewElement,
     "game-view": GameViewElement,
     "game-edit": GameEditElement,
+    "account-view": AccountViewElement,
+    "rating-view": RatingViewElement,
+    "recommendation-view": RecommendationViewElement,
   });
 
   protected render() {
@@ -42,6 +48,20 @@ const routes = [
     path: "/app/games/:gameId/edit",
     view: (params: Switch.Params) =>
       html`<game-edit gameId=${params.gameId}></game-edit>`,
+  },
+  {
+    path: "/app/accounts/:userId",
+    view: (params: Switch.Params) =>
+      html`<account-view userId=${params.userId}></account-view>`,
+  },
+  {
+    path: "/app/ratings",
+    view: (params: Switch.Params) =>
+      html`<rating-view gameList=${params.gameList}></rating-view>`,
+  },
+  {
+    path: "/app/recommendations",
+    view: () => html`<recommendation-view></recommendation-view>`,
   },
 ];
 

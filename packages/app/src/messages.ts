@@ -10,4 +10,7 @@ export type Msg =
         onFailure?: (err: Error) => void;
       }
     ]
-  | ["game/select", { gameId: string }];
+  | ["game/select", { gameId: string }]
+  | ["account/select", { userId: string }]
+  | ["rating/select", { gameList: Array<Game> }]
+  | ["recommendation/select"];

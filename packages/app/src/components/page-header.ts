@@ -7,11 +7,11 @@ export class PageHeaderElement extends LitElement {
       <header>
         <h1>Steam Games Essentials</h1>
         <div>
-          <a href="./ratings"> Games Rated </a>
+          <a href="/app/ratings"> Games Rated </a>
           <svg class="icon"><use href="./icons/game.svg#icon-rate" /></svg>
         </div>
         <div>
-          <a href="./recommendations"> Recommended Games </a>
+          <a href="/app/recommendations"> Recommended Games </a>
           <svg class="icon"><use href="./icons/game.svg#icon-rec" /></svg>
         </div>
         <label @change=${toggleDarkMode}>
@@ -19,7 +19,7 @@ export class PageHeaderElement extends LitElement {
           Dark mode
         </label>
         <h3>
-          <a href="/accounts/1">
+          <a href="/app/accounts/1">
             <svg class="icon">
               <use href="./icons/game.svg#icon-user" />
             </svg>
