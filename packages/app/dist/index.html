@@ -14,124 +14,15 @@
       href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <!--
- <script type="importmap">
-      {
-        "imports": {
-          "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
-        }
-      }
-    </script>
-    <script type="module">
-      import { define, Auth } from "@calpoly/mustang";
-      import { GameElement } from "/src/components/game.js";
-      import { PageHeaderElement } from "/src/components/page-header";
-
-      define({
-        "game-card": GameElement,
-        "mu-auth": Auth.Provider,
-        "page-header": PageHeaderElement,
-      });
-    </script>
-    <script>
-      document.body.addEventListener("dark-mode:toggle", (event) => {
-        const page = event.currentTarget;
-        const checked = event.detail.checked;
-        page.classList.toggle("dark-mode", checked);
-      });
-
-      function toggleDarkMode(target, checked) {
-        const customEvent = new CustomEvent("dark-mode:toggle", {
-          bubbles: true,
-          detail: { checked },
-        });
-        target.dispatchEvent(customEvent);
-      }
-      window.toggleDarkMode = toggleDarkMode;
-    </script> -->
-    <script type="module" crossorigin src="/assets/index-BSBZ1D7w.js"></script>
+    <script type="module" crossorigin src="/assets/index-FHf562YX.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BFQZ5GAn.css">
   </head>
   <body>
     <mu-history provides="stats:history">
       <mu-auth provides="stats:auth">
-        <!-- <page-header></page-header> -->
-        <mu-switch></mu-switch>
-        <!-- <stats-app></stats-app> -->
-        <!-- <div class="game-layout">
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">The Sims 4</h1>
-            <li slot="price">Price: $29.99</li>
-            <li slot="genre">Genre: Life Sim</li>
-            <li slot="rating">Rating: 8.6</li>
-            <li slot="player-count">Current Players: 30,647</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Stardew Valley</h1>
-            <li slot="price">Price: $14.99</li>
-            <li slot="genre">Genre: Farming Sim</li>
-            <li slot="rating">Rating: 9.8</li>
-            <li slot="player-count">Current Players: 77,436</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Team Fortress 2</h1>
-            <li slot="price">Price: Free</li>
-            <li slot="genre">Genre: FPS</li>
-            <li slot="rating">Rating: 8.8</li>
-            <li slot="player-count">Current Players: 37,464</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Grand Theft Auto 5</h1>
-            <li slot="price">Price: $29.99</li>
-            <li slot="genre">Genre: Open World</li>
-            <li slot="rating">Rating: 8.7</li>
-            <li slot="player-count">Current Players: 57,837</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Cats</h1>
-            <li slot="price">Price: Free</li>
-            <li slot="genre">Genre: Clicker</li>
-            <li slot="rating">Rating: 7.4</li>
-            <li slot="player-count">Current Players: 21,841</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Helldivers 2</h1>
-            <li slot="price">Price: $39.99</li>
-            <li slot="genre">Genre: Third-Person Shooter</li>
-            <li slot="rating">Rating: 7.2</li>
-            <li slot="player-count">Current Players: 21,461</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Overwatch 2</h1>
-            <li slot="price">Price: Free</li>
-            <li slot="genre">Genre: Hero Shooter</li>
-            <li slot="rating">Rating: 2.1</li>
-            <li slot="player-count">Current Players: 28,284</li>
-          </game-card></a
-        >
-        <a href="./game.html"
-          ><game-card>
-            <h1 slot="game-name">Slay the Spire</h1>
-            <li slot="price">Price: $24.99</li>
-            <li slot="genre">Genre: Card Game</li>
-            <li slot="rating">Rating: 9.7</li>
-            <li slot="player-count">Current Players: 8,733</li>
-          </game-card></a
-        >
-      </div> -->
+        <mu-store provides="stats:model">
+          <mu-switch></mu-switch>
+        </mu-store>
       </mu-auth>
     </mu-history>
   </body>
